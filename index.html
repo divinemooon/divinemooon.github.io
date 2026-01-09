@@ -1,96 +1,201 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>90s Cursor Effects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="JavaScript mouse effects that follow your cursor or finger!"
+    />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐭</text></svg>">
 
-<canvas id="canvas" width="400" height="400" style="background-color:#333">
-Sorry, your browser does not support canvas.
-</canvas>
 
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90
-setInterval(drawClock, 1000);
+    <link rel="stylesheet" href="style.css" />
+    <script src="browser.js"> </script>
+  </head>
+  <body>
+    <header><h1>90s Cursor Effects</h1></header>
 
-function drawClock() {
-  drawFace(ctx, radius);
-  drawNumbers(ctx, radius);
-  drawTime(ctx, radius);
-}
+    <div class="wrapper">
+      I'd like to take the web back a little bit, into the wonderful days where
+      knowing how to get your little mouse arrow to <span>dance</span> and
+      <span>sway</span> was the most of your worries.
 
-function drawFace(ctx, radius) {
-  const grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
-  grad.addColorStop(0, '#333');
-  grad.addColorStop(0.5, 'white');
-  grad.addColorStop(1, '#333');
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, 2*Math.PI);
-  ctx.fillStyle = 'white';
-  ctx.fill();
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = radius*0.1;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
-  ctx.fillStyle = '#333';
-  ctx.fill();
-}
+      <br /><br />Each of the cursor effects below are built for your modern
+      browser (fast, efficient, mobile friendly), and are super easy to add to
+      your site!
 
-function drawNumbers(ctx, radius) {
-  ctx.font = radius*0.15 + "px arial";
-  ctx.textBaseline="middle";
-  ctx.textAlign="center";
-  for(let num = 1; num < 13; num++){
-    let ang = num * Math.PI / 6;
-    ctx.rotate(ang);
-    ctx.translate(0, -radius*0.85);
-    ctx.rotate(-ang);
-    ctx.fillText(num.toString(), 0, 0);
-    ctx.rotate(ang);
-    ctx.translate(0, radius*0.85);
-    ctx.rotate(-ang);
-  }
-}
+      <br /><br />
+      To get started adding a cursor effect to your site, check out the
+      documentation
+      <a href="https://github.com/tholman/cursor-effects">on GitHub.</a>
+    </div>
 
-function drawTime(ctx, radius){
-    const now = new Date();
-    let hour = now.getHours();
-    let minute = now.getMinutes();
-    let second = now.getSeconds();
-    //hour
-    hour=hour%12;
-    hour=(hour*Math.PI/6)+
-    (minute*Math.PI/(6*60))+
-    (second*Math.PI/(360*60));
-    drawHand(ctx, hour, radius*0.5, radius*0.07);
-    //minute
-    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-    drawHand(ctx, minute, radius*0.8, radius*0.07);
-    // second
-    second=(second*Math.PI/30);
-    drawHand(ctx, second, radius*0.9, radius*0.02);
-}
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Rainbow</span>
+          </div>
+          <div class="byline">
+            A little color never hurt anyone
+          </div>
+        </div>
+        <div id="rainbow" class="effect"></div>
+      </div>
+    </div>
 
-function drawHand(ctx, pos, length, width) {
-    ctx.beginPath();
-    ctx.lineWidth = width;
-    ctx.lineCap = "round";
-    ctx.moveTo(0,0);
-    ctx.rotate(pos);
-    ctx.lineTo(0, -length);
-    ctx.stroke();
-    ctx.rotate(-pos);
-}
-</script>
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Clock</span>
+          </div>
+          <div class="byline">
+            An old classic, more ugly than useful, but lovable for sure
+          </div>
+        </div>
+        <div id="clock" class="effect"></div>
+      </div>
+    </div>
 
-<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
-<script>
-  window.addEventListener("load", () => {
-    new cursorEffects.ClockCursor();
-  });
-</script>
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Fairy Dust</span>
+          </div>
+          <div class="byline">
+            An old classic, sprinkling stardust onto the page
+          </div>
+        </div>
+        <div id="fairyDust" class="effect"></div>
+      </div>
+    </div>
 
-</body>
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Text Flag</span>
+          </div>
+          <div class="byline">
+            A waving flag of text
+          </div>
+        </div>
+        <div id="textFlag" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Ghost</span>
+          </div>
+          <div class="byline">
+            A trailing of ghost cursors, as classic as they come
+          </div>
+        </div>
+        <div id="ghost" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Trailing</span>
+          </div>
+          <div class="byline">
+            An elasticish trail of cursors that will nip to wherever your mouse is
+          </div>
+        </div>
+        <div id="trailing" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Following Dot</span>
+          </div>
+          <div class="byline">
+            A dot that follows your mouse with a little lag, a modern look
+          </div>
+        </div>
+        <div id="following" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Elastic Emoji</span>
+          </div>
+          <div class="byline">Guaranteed to provide fun for hours</div>
+        </div>
+        <div id="springs" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Emoji Rain</span>
+          </div>
+          <div class="byline">
+            A nice modern dusting of emoji based particles
+          </div>
+        </div>
+        <div id="emoji" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Bubbles</span>
+          </div>
+          <div class="byline">Bloop bloop bloop, you're under the sea</div>
+        </div>
+        <div id="bubbles" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Snowflakes</span>
+          </div>
+          <div class="byline">
+            Winter is here, and it's brought snow with it
+          </div>
+        </div>
+        <div id="snowflake" class="effect"></div>
+      </div>
+    </div>
+
+    <div class="cursor">
+      <div class="box">
+        <div class="info">
+          <div class="name">
+            <span>Characters</span>
+          </div>
+          <div class="byline">
+            Characters under your control
+          </div>
+        </div>
+        <div id="character" class="effect"></div>
+      </div>
+    </div>
+
+    <script async src="index.js"></script>
+  </body>
 </html>
